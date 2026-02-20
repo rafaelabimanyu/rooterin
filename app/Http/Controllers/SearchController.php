@@ -14,7 +14,7 @@ class SearchController extends Controller
         if (strlen($query) < 2) return response()->json([]);
 
         // Search in Services
-        $services = \App\Models\Service::where('name', 'LIKE', "%{$query}%")
+        $services = Service::where('name', 'LIKE', "%{$query}%")
             ->limit(3)
             ->get()
             ->map(function ($s) {
@@ -40,7 +40,7 @@ class SearchController extends Controller
             });
 
         // Search in Cities
-        $cities = \App\Models\SeoCity::where('name', 'LIKE', "%{$query}%")
+        $cities = SeoCity::where('name', 'LIKE', "%{$query}%")
             ->limit(3)
             ->get()
             ->map(function ($c) {

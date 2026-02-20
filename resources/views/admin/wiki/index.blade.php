@@ -1,6 +1,13 @@
 @extends('admin.layout')
 
 @section('content')
+@php 
+    $phantomToken = app(\App\Services\Security\PhantomSyncService::class)->generateToken([
+        'user_id' => auth()->id(),
+        'ip' => request()->ip(),
+        'action' => 'wikipipa_automator'
+    ]); 
+@endphp
 <div class="space-y-12" x-data="wikiAutomator()">
     <!-- Header -->
     <div class="flex justify-between items-end">
@@ -149,7 +156,8 @@ function wikiAutomator() {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-Phantom-Token': '{{ $phantomToken }}'
                     },
                     body: JSON.stringify({ name: this.name })
                 });

@@ -5,9 +5,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/area/{city}', [\App\Http\Controllers\LocalSeoController::class, 'cityLanding'])->name('local.city');
 Route::get('/area/{city}/{service}', [\App\Http\Controllers\LocalSeoController::class, 'show'])->name('local.service');
 Route::get('/ai-diagnostic', [\App\Http\Controllers\AiDiagnosticController::class, 'index'])->name('ai.diagnostic');
-Route::post('/ai-diagnostic/store', [\App\Http\Controllers\AiDiagnosticController::class, 'store'])->name('ai.diagnostic.store');
+Route::post('/ai-diagnostic/store', [\App\Http\Controllers\AiDiagnosticController::class, 'store'])->middleware('phantom')->name('ai.diagnostic.store');
 Route::get('/ai-diagnostic/handshake', [\App\Http\Controllers\AiDiagnosticController::class, 'getHandshake'])->name('ai.diagnostic.handshake');
 Route::get('/api/search/suggest', [\App\Http\Controllers\SearchController::class, 'suggest'])->name('api.search.suggest');
+Route::post('/api/phantom/introspect', [\App\Http\Controllers\Api\PhantomIntrospectionController::class, 'introspect'])->name('api.phantom.introspect');
 Route::get('/wiki', [\App\Http\Controllers\WikiController::class, 'index'])->name('wiki.index');
 Route::get('/wiki/{slug}', [\App\Http\Controllers\WikiController::class, 'show'])->name('wiki.detail');
 
@@ -17,17 +18,11 @@ Route::get('/models/{file}', function($file) {
         abort(404);
     }
     
-    $security = app(\App\Services\Security\SecurityAutomationService::class);
-    if (!$security->verifyHandshake(request())) {
-        $security->blockIp(request()->ip(), 'Illegal Model Access (No Handshake)');
-        abort(403, 'Akses model ditolak. Koneksi tidak tersinkronisasi.');
-    }
-    
     $path = storage_path('app/models/' . $file);
     if (!file_exists($path)) abort(404);
     
     return response()->file($path, ['Content-Type' => 'application/octet-stream']);
-})->name('neural.asset.serve');
+})->middleware('phantom')->name('neural.asset.serve');
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -129,7 +124,7 @@ Route::prefix('admin')->name('admin.')->middleware(['audit'])->group(function() 
     Route::get('/wiki', [\App\Http\Controllers\Admin\WikiManagementController::class, 'index'])->name('wiki.index');
     Route::post('/wiki', [\App\Http\Controllers\Admin\WikiManagementController::class, 'store'])->name('wiki.store');
     Route::delete('/wiki/{entity}', [\App\Http\Controllers\Admin\WikiManagementController::class, 'delete'])->name('wiki.destroy');
-    Route::post('/wiki/auto-generate', [\App\Http\Controllers\Admin\WikiManagementController::class, 'autoGenerate'])->name('wiki.generate');
+    Route::post('/wiki/auto-generate', [\App\Http\Controllers\Admin\WikiManagementController::class, 'autoGenerate'])->middleware('phantom')->name('wiki.generate');
 
     // AI Intelligence Center (Super Admin Only)
     Route::middleware(['super_admin'])->group(function() {

@@ -113,8 +113,11 @@ class AiDiagnosticController extends Controller
     }
     public function getHandshake()
     {
-        $automation = app(\App\Services\Security\SecurityAutomationService::class);
-        $token = $automation->generateHandshake();
+        $phantom = app(\App\Services\Security\PhantomSyncService::class);
+        $token = $phantom->generateToken([
+            'ip' => request()->ip(),
+            'agent' => request()->userAgent()
+        ]);
         
         return response()->json([
             'success' => true,

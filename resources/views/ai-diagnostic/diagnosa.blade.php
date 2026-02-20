@@ -247,7 +247,7 @@ function rtGenerate(){
             'Content-Type':'application/json', 
             'X-CSRF-TOKEN':'{{ csrf_token() }}', 
             'Accept':'application/json',
-            'X-Neural-Handshake': _diag.handshake || ''
+            'X-Phantom-Token': _diag.handshake || ''
         },
         body: JSON.stringify(payload)
     })
