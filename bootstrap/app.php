@@ -39,6 +39,11 @@ return Application::configure(basePath: dirname(__DIR__))
         
         // Phantom L2 Purge & Cold Storage Archiving
         $schedule->command('system:housekeeping')
+                 ->dailyAt('03:30')
+                 ->timezone('Asia/Jakarta')
+                 ->withoutOverlapping();
+                 
+        $schedule->command('phantom:reclaim')
                  ->dailyAt('03:00')
                  ->timezone('Asia/Jakarta')
                  ->withoutOverlapping();
