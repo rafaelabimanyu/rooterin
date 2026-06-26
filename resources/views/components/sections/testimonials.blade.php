@@ -1,7 +1,7 @@
 @props(['items' => []])
 
 @if(count($items) > 0)
-<section class="py-20 sm:py-32 bg-slate-950 text-white relative overflow-hidden border-t border-white/5">
+<section class="pt-20 pb-36 sm:py-32 bg-slate-950 text-white relative overflow-hidden border-t border-white/5">
     <!-- Ambient Background Glows -->
     <div class="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
     <div class="absolute bottom-1/4 right-0 w-96 h-96 bg-[#1FAF5A]/10 rounded-full blur-[120px] pointer-events-none"></div>
@@ -24,6 +24,15 @@
         <div x-data="{ 
             active: 0,
             skip: 1,
+            isPaused: false,
+            total: {{ count($items) }},
+            init() {
+                setInterval(() => {
+                    if (!this.isPaused) {
+                        this.next();
+                    }
+                }, 4500);
+            },
             next() {
                 this.active = (this.active + this.skip >= this.total) ? 0 : this.active + this.skip;
                 this.scroll();
@@ -42,9 +51,13 @@
                         behavior: 'smooth'
                     });
                 }
-            },
-            total: {{ count($items) }}
-        }" class="relative">
+            }
+        }" 
+        @mouseenter="isPaused = true" 
+        @mouseleave="isPaused = false"
+        @touchstart="isPaused = true"
+        @touchend="isPaused = false"
+        class="relative">
 
             <!-- Slider Wrapper -->
             <div x-ref="slider" class="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-10">
@@ -93,7 +106,7 @@
 
             <!-- Controls (Dot Navigation & Arrows) -->
             @if(count($items) > 1)
-            <div class="flex items-center justify-between mt-6">
+            <div class="flex items-center justify-between mt-6 pb-6 sm:pb-0">
                 <!-- Dot indicators -->
                 <div class="flex gap-2">
                     @foreach($items as $index => $item)
