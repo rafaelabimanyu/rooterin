@@ -61,6 +61,10 @@
                     <i class="ri-gallery-line text-xl"></i>
                     <span class="text-sm font-bold">Galeri Proyek</span>
                 </a>
+                <a href="{{ route('admin.testimonials.index') }}" class="flex items-center gap-4 px-4 py-3 rounded-lg transition-all {{ request()->routeIs('admin.testimonials.*') ? 'bg-primary/10 text-primary border-l-4 border-primary' : 'hover:bg-white/5 text-slate-400 hover:text-white' }}">
+                    <i class="ri-chat-heart-line text-xl"></i>
+                    <span class="text-sm font-bold">Testimonial</span>
+                </a>
                 <a href="{{ route('admin.media.index') }}" class="flex items-center gap-4 px-4 py-3 rounded-lg transition-all {{ request()->routeIs('admin.media.*') ? 'bg-primary/10 text-primary border-l-4 border-primary' : 'hover:bg-white/5 text-slate-400 hover:text-white' }}">
                     <i class="ri-image-2-line text-xl"></i>
                     <span class="text-sm font-bold">Media Library</span>

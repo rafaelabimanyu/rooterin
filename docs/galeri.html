@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="ANQqBMdxinNSYfaxITBrxnBm5JdsXUFQ6rtqu9yz">
+    <meta name="csrf-token" content="LqMarPBvRFIZybhwIh6kyIKqgk6agemTzEiFVti4">
 
     <title>It's Over 9000!</title>
 <meta name="description" content="For those who helped create the Genki Dama">
@@ -634,7 +634,7 @@
                     x-transition:enter-start="opacity-0 translate-y-10 scale-95"
                     x-transition:enter-end="opacity-100 translate-y-0 scale-100"
                     @click="activeItem = item"
-                    class="group relative cursor-pointer"
+                    x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="group relative cursor-pointer"
                     :class="{ 
                         'lg:col-span-2 lg:row-span-2': index % 10 === 0, 
                         'lg:col-span-2': index % 10 === 3 || index % 10 === 7,

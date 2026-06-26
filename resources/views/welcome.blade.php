@@ -30,9 +30,7 @@
 
     {{-- 2. Trust Banner - Unique Selling Propositions --}}
     <x-sections.trust-banner />
-
-
-
+    
     {{-- 3. Features Section - Problem Solver Explanation --}}
     <x-sections.features />
 
@@ -47,6 +45,9 @@
 
     {{-- 6. Gallery Section - Visual Proof of Completion --}}
     <x-sections.gallery :items="$projects" />
+
+    {{-- 6.5. Testimonial Section - Trusted Reviews --}}
+    <x-sections.testimonials :items="$testimonials" />
 
     {{-- 7. FAQ Section - Addressing Common Concerns --}}
     <x-sections.faq :faqs="$faqs" />

@@ -34,7 +34,7 @@ class HomeController extends Controller
             ];
         });
         
-        $testimonials = Testimonial::all();
+        $testimonials = Testimonial::where('is_active', true)->get();
 
         $faqs = \App\Models\Faq::landing()->orderBy('order')->get()->map(function($f) {
             return [

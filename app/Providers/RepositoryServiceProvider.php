@@ -11,6 +11,8 @@ use App\Repositories\Contracts\ProjectRepositoryInterface;
 use App\Repositories\Eloquent\EloquentProjectRepository;
 use App\Repositories\Contracts\AiIntelligenceRepositoryInterface;
 use App\Repositories\Eloquent\AiIntelligenceRepository;
+use App\Repositories\Contracts\TestimonialRepositoryInterface;
+use App\Repositories\Eloquent\EloquentTestimonialRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ServiceRepositoryInterface::class, EloquentServiceRepository::class);
         $this->app->bind(ProjectRepositoryInterface::class, EloquentProjectRepository::class);
         $this->app->bind(AiIntelligenceRepositoryInterface::class, AiIntelligenceRepository::class);
+        $this->app->bind(TestimonialRepositoryInterface::class, EloquentTestimonialRepository::class);
     }
 
     /**

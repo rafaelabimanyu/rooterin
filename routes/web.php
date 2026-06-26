@@ -83,6 +83,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'audit', 'verified']
     Route::put('/projects/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'update'])->name('projects.update');
     Route::delete('/projects/{id}', [\App\Http\Controllers\Admin\ProjectController::class, 'destroy'])->name('projects.destroy');
     
+    Route::get('/testimonials', [\App\Http\Controllers\Admin\TestimonialController::class, 'index'])->name('testimonials.index');
+    Route::get('/testimonials/create', [\App\Http\Controllers\Admin\TestimonialController::class, 'create'])->name('testimonials.create');
+    Route::post('/testimonials', [\App\Http\Controllers\Admin\TestimonialController::class, 'store'])->name('testimonials.store');
+    Route::get('/testimonials/{id}/edit', [\App\Http\Controllers\Admin\TestimonialController::class, 'edit'])->name('testimonials.edit');
+    Route::put('/testimonials/{id}', [\App\Http\Controllers\Admin\TestimonialController::class, 'update'])->name('testimonials.update');
+    Route::delete('/testimonials/{id}', [\App\Http\Controllers\Admin\TestimonialController::class, 'destroy'])->name('testimonials.destroy');
+    Route::patch('/testimonials/{id}/toggle-active', [\App\Http\Controllers\Admin\TestimonialController::class, 'toggleActive'])->name('testimonials.toggle-active');
+    
     // Config
     Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings/bulk', [\App\Http\Controllers\Admin\SettingController::class, 'updateBulk'])->name('settings.bulk');
