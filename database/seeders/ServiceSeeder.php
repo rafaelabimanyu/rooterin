@@ -19,11 +19,11 @@ class ServiceSeeder extends Seeder
                 'icon' => 'ri-water-flash-fill',
                 'description_short' => 'Solusi tuntas WC & pipa mampet dengan mesin Spiral Baja.',
                 'description_full' => 'Menghancurkan sumbatan kerak lemak tanpa merusak konstruksi menggunakan teknologi modern tanpa bongkar.',
-                'price' => 600000,
+                'price' => 400000,
                 'items' => ['Sal. Kamar Mandi', 'Sal. Cuci Piring', 'Sal. Cuci Tangan', 'Sal. Talang Air Hujan', 'Sal. Urinoir', 'Sal. Kloset', 'Sal. Bak Kontrol', 'Lain-lain'],
                 'pricing' => [
-                    ['type' => 'Rumah Hunian', 'price' => 'Rp. 600.000,-', 'note' => 'Per-titik Masalah, Garansi 30 Hari'],
-                    ['type' => 'Komersial (Resto, Kantor, dll)', 'price' => 'Rp. 800.000 - 1.800.000', 'note' => 'Per-titik Masalah, Garansi 30 Hari']
+                    ['type' => 'Rumah Hunian', 'price' => 'Rp. 400.000,-', 'note' => 'Per-titik Masalah, Garansi 30 Hari'],
+                    ['type' => 'Komersial (Resto, Kantor, dll)', 'price' => 'Rp. 600.000 - 1.000.000', 'note' => 'Per-titik Masalah, Garansi 30 Hari']
                 ],
                 'is_active' => true,
             ],
